@@ -78,5 +78,5 @@ export default api;
 criei um script python create_tables.py e um insert_review.py 
 caso seja necessãio recriar tabelas e dar carga no BD
 
-
+docker build --build-arg REPO_URL=git@github.com:EduardoZava/average-alligator.git -t movie-app-backend .
 
