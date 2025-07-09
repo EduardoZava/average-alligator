@@ -1,0 +1,28 @@
+version: '3.8' # Define a versão da sintaxe do Docker Compose
+
+services:
+  # Serviço para a aplicação React (frontend)
+  client:
+    image: movie-app-client # Nome da imagem Docker que você construiu para o frontend
+    container_name: movie_app_client_container # Nome amigável para o contêiner
+    ports:
+      - "3000:80" # Mapeia a porta 3000 do seu host para a porta 80 do contêiner (Nginx)
+    networks:
+      - app_network # Conecta este serviço à rede compartilhada
+
+  # Serviço para a aplicação FastAPI (backend)
+  backend:
+    image: movie-app-backend # Nome da imagem Docker que você construiu para o backend FastAPI
+    container_name: movie_app_backend_container # Nome amigável para o contêiner
+    ports:
+      - "8000:8000" # Mapeia a porta 8000 do seu host para a porta 8000 do contêiner (FastAPI)
+    networks:
+      - app_network # Conecta este serviço à rede compartilhada
+    # Depende do frontend, garantindo que o backend inicie antes (opcional, mas boa prática)
+    # depends_on:
+    #   - client # Descomente se o backend precisar que o cliente esteja rodando para iniciar
+
+# Definição das redes
+networks:
+  app_network:
+    driver: bridge # Tipo de rede (bridge é o padrão e mais comum)
