@@ -5,7 +5,7 @@ FROM python:3.10-alpine AS build
 
 # Instala o cliente OpenSSH, necessário para clonar o repositório via SSH.
 # O '--no-cache' ajuda a manter o tamanho da imagem final pequeno.
-RUN apk add --no-cache openssh-client git
+RUN apk add --no-cache git
 
 # Define o diretório de trabalho principal dentro do contêiner.
 WORKDIR /app
