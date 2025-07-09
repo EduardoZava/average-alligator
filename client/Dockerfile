@@ -15,7 +15,7 @@ RUN git clone https://github.com/EduardoZava/average-alligator.git .
 WORKDIR /app/client
 
 # Instale as dependências
-RUN npm ci
+RUN npm install
 
 # Faça o build da aplicação
 RUN npm run build

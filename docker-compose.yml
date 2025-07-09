@@ -2,8 +2,8 @@ version: '3.8' # Define a versão da sintaxe do Docker Compose
 
 services:
   # Serviço para a aplicação React (frontend)
-  client:
-    image: movie-app-client # Nome da imagem Docker que você construiu para o frontend
+  frontend:
+    image: movie-app-frontend # Nome da imagem Docker que você construiu para o frontend
     container_name: movie_app_client_container # Nome amigável para o contêiner
     ports:
       - "3000:80" # Mapeia a porta 3000 do seu host para a porta 80 do contêiner (Nginx)
