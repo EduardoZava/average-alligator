@@ -3,10 +3,6 @@ FROM node:18-alpine AS build
 
 RUN apk add --no-cache git
 
-RUN apk add --no-cache openssh-client
-
-RUN mkdir -p ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
-
 # Defina o diretório de trabalho
 WORKDIR /app
 
@@ -14,7 +10,7 @@ WORKDIR /app
 # git@github.com:EduardoZava/average-alligator.git
 ARG REPO_URL
 
-RUN --mount=type=ssh git clone ${REPO_URL} .
+RUN git clone ${REPO_URL} .
 
 WORKDIR /app/client
 
