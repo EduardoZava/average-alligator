@@ -22,7 +22,6 @@ WORKDIR /app/movie-api
 
 # Instala as dependências do Python a partir do arquivo requirements.txt.
 # Presume-se que 'requirements.txt' está dentro da pasta 'movie-api'.
-COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copia o restante do código da aplicação para o contêiner.
