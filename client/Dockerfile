@@ -5,6 +5,8 @@ RUN apk add --no-cache git
 
 RUN apk add --no-cache openssh-client
 
+RUN mkdir -p ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
+
 # Defina o diretório de trabalho
 WORKDIR /app
 
@@ -12,9 +14,10 @@ WORKDIR /app
 # git@github.com:EduardoZava/average-alligator.git
 ARG REPO_URL
 
-RUN git clone ${REPO_URL} .
+RUN --mount=type=ssh git clone ${REPO_URL} .
 
-RUN cd client
+WORKDIR /app/client
+
 # Instale as dependências
 RUN npm install
 
@@ -25,7 +28,7 @@ RUN npm run build
 FROM nginx:alpine
 
 # Copie os arquivos de build do React para o Nginx
-COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build /app/client/build /usr/share/nginx/html
 
 # Copie configuração customizada do Nginx (opcional)
 # COPY nginx.conf /etc/nginx/conf.d/default.conf
@@ -35,6 +38,3 @@ EXPOSE 80
 
 # Comando padrão para rodar o Nginx
 CMD ["nginx", "-g", "daemon off;"]
-
-#docker build --build-arg REPO_URL=<URL_DO_REPOSITORIO> -t minha-app-react .
-

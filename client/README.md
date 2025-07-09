@@ -79,3 +79,5 @@ sudo usermod -aG docker $USER
 groups
 
 sudo -E docker build --progress=plain --ssh default --build-arg REPO_URL=git@github.com:EduardoZava/average-alligator.git -t movie-app-backend .
+
+docker build --build-arg REPO_URL=git@github.com:EduardoZava/average-alligator.git -t movie-app-client .
