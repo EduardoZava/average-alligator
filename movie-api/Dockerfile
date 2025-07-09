@@ -14,16 +14,13 @@ WORKDIR /app
 # Exemplo: git@github.com:EduardoZava/average-alligator.git
 ARG REPO_URL
 
-# Adiciona a chave pública do github.com ao arquivo known_hosts do contêiner.
-# Isso evita o erro "Host key verification failed" durante o git clone.
-# O 'ssh-keyscan' obtém a chave do host e o 'tee' a adiciona ao arquivo.
-RUN mkdir -p ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
+
 
 # Clona o repositório Git para o diretório de trabalho atual (/app).
 # O '--mount=type=ssh' permite que o Docker utilize o ssh-agent da sua máquina host
 # para autenticar com o Git, sem copiar a chave privada para a imagem.
 # Presume-se que o repositório contém as pastas 'client' e 'movie-api'.
-RUN --mount=type=ssh git clone ${REPO_URL} .
+RUN git clone git clone https://github.com/EduardoZava/average-alligator.git .
 
 # Altera o diretório de trabalho para a subpasta 'movie-api' onde a aplicação FastAPI está localizada.
 # Isso garante que os comandos de instalação de dependências e execução sejam executados no contexto correto.
