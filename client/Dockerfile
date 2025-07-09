@@ -10,7 +10,7 @@ WORKDIR /app
 # git@github.com:EduardoZava/average-alligator.git
 ARG REPO_URL
 
-RUN git clone ${REPO_URL} .
+RUN git clone https://github.com/EduardoZava/average-alligator.git .
 
 WORKDIR /app/client
 
