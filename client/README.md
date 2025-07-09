@@ -70,3 +70,12 @@ https://www.omdbapi.com/?apikey=38e11782&i=tt3896198&plot=full
 apikey=38e11782
 
 utilzei o axios para acesso a api
+
+ssh-add ~/.ssh/id_ed25519
+ssh-add -l
+echo $SSH_AUTH_SOCK
+
+sudo usermod -aG docker $USER
+groups
+
+sudo -E docker build --progress=plain --ssh default --build-arg REPO_URL=git@github.com:EduardoZava/average-alligator.git -t movie-app-backend .
